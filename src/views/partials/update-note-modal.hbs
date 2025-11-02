@@ -1,0 +1,39 @@
+<dialog id="update_note_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="text-lg font-bold">Edit Note</h3>
+        <p class="text-sm opacity-70">Update your note and save changes.</p>
+        <hr class="mt-2" />
+
+        <form id="update-note-form" class="mt-4 flex flex-col gap-4" method="POST">
+            <input type="hidden" name="_method" value="PUT" />
+
+            <div class="flex flex-row gap-2">
+                <div class="form-control w-full flex flex-col gap-1">
+                    <label class="label px-0.5">
+                        <span class="label-text">Title</span>
+                    </label>
+                    <input id="update-title" type="text" name="title" class="input input-bordered w-full" required />
+                </div>
+                <div class="form-control w-24 flex flex-col gap-1">
+                    <label class="label px-0.5">
+                        <span class="label-text">Color</span>
+                    </label>
+                    <input id="update-bgColor" type="color" name="bgColor" class="input input-bordered w-full"
+                        required />
+                </div>
+            </div>
+
+            <div class="form-control w-full flex flex-col gap-1">
+                <label class="label px-0.5">
+                    <span class="label-text">Content</span>
+                </label>
+                <textarea id="update-content" name="content" class="textarea w-full" rows="6"></textarea>
+            </div>
+
+            <div class="flex flex-row justify-end gap-2">
+                <button type="button" class="btn btn-outline" onclick="closeModal('update_note_modal')">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</dialog>

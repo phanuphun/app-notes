@@ -11,6 +11,8 @@ import hbsEngineConfigOptions from './configs/hbs.config';
 import connectLiveReload from "connect-livereload";
 import cookieParser from 'cookie-parser';
 import { attachUserFromJwtCookie } from './middlewares/web-auth';
+import methodOverride from 'method-override';
+
 
 const app = express();
 
@@ -37,6 +39,7 @@ function createApp(): express.Express {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('public'));
 
+    app.use(methodOverride('_method'));
     app.use(morgan('short'));
     app.use(cors());
     app.use(cookieParser());

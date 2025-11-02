@@ -17,12 +17,14 @@
             <div class="card-body">
                 <div class="card-action">
                     <div class="w-full flex flex-row gap-2 justify-end">
-                        <button class="btn btn-sm btn- btn-outline">
+                        <button class="btn btn-sm btn-outline" data-note-id="{{_id}}" data-title="{{title}}"
+                            data-content="{{content}}" data-bgcolor="{{bgColor}}" onclick="openEditModal(this)">
                             Edit
                         </button>
-                        <button class="btn btn-sm btn- btn-error btn-outline">
-                            Delete
-                        </button>
+                        <form method="POST" action="/notes/{{_id}}?_method=DELETE"
+                            onsubmit="return confirm('Delete this note?')">
+                            <button type="submit" class="btn btn-sm btn-error btn-outline">Delete</button>
+                        </form>
                     </div>
                 </div>
                 <h3 class="card-title text-xl">{{title}}</h3>
@@ -38,3 +40,40 @@
         {{/if}}
     </div>
 </div>
+
+{{> update-note-modal}}
+
+<script>
+    // เปิด modal และเติมค่า
+    function openEditModal(btn) {
+        const id = btn.dataset.noteId;
+        const title = btn.dataset.title || '';
+        const content = btn.dataset.content || '';
+        const bgColor = btn.dataset.bgcolor || '#ffffff';
+
+        const form = document.getElementById('update-note-form');
+        form.action = `/notes/${id}?_method=PUT`;  // ใช้ method-override
+
+        document.getElementById('update-title').value = title;
+        document.getElementById('update-content').value = content;
+        document.getElementById('update-bgColor').value = bgColor;
+
+        openModal('update_note_modal');
+    }
+
+    // ใช้ helper เดิมของคุณ
+    function openModal(id) {
+        const dlg = document.getElementById(id);
+        if (!dlg) return;
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+    }
+    function closeModal(id) {
+        const dlg = document.getElementById(id);
+        if (!dlg) return;
+        if (typeof dlg.close === 'function') dlg.close();
+        dlg.removeAttribute('open');
+    }
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+</script>
