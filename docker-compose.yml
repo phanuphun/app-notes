@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: app-note-ssr
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://admin:admin1234@app-note-mongo:27017/appNote?authSource=admin&directConnection=true
+      - PORT=3000
+      - HOST=0.0.0.0
+      - PREFIX=/api/v1
+      - NAME=note app
+      - VERSION=1.0.0
+      - DESCRIPTION=A simple note-taking application
+      - APP_SECRET=2224221025668374
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - app-note-network
+    volumes:
+      - ./public/uploads:/app/dist/public/uploads
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    container_name: app-note-mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin1234
+      - MONGO_INITDB_DATABASE=appNote
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-note-network
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+
+networks:
+  app-note-network:
+    driver: bridge

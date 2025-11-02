@@ -32,7 +32,8 @@ const loginUser: RequestHandler = async (req, res) => {
     res.cookie('access_token', token, {
         httpOnly: true,
         sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
+        // secure: process.env.NODE_ENV === 'production',
+        secure: false,
         maxAge: 3 * 60 * 60 * 1000, // 3 hours
         path: '/',  
     });

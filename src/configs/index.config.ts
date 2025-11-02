@@ -6,7 +6,7 @@ const appConfig = {
         port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
         name: process.env.NAME || 'chat-room',
         version: process.env.VERSION || '1.0.0-development',
-        prefix: process.env.PREFIX || '/api',
+        prefix: process.env.PREFIX || '/api/v1',
         description: process.env.DESCRIPTION || 'A simple chat room application',
         secret: process.env.APP_SECRET || 'supersecretkey'
     },

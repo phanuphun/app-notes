@@ -7,8 +7,8 @@ import noteController from "../../controllers/notes.controller";
 import webNotesRouter from "./notes.web.router";
 
 const webRouter = Router();
-
 webRouter.get("/", requireLogin, noteController.renderedNote);
+
 webRouter.use("/", webAuthRouter);
 webRouter.use("/", requireLogin, webAccountRouter);
 webRouter.use("/", requireLogin, webNotesRouter);

@@ -7,6 +7,7 @@ const renderedNote: RequestHandler = async (req, res) => {
     return res.render("home", {
         title: "Home",
         user: req.user,
+        pageScripts: ['/javascript/pages/notes.js'],
         notes
     });
 }

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/chat-room?authSource=admin";
+const mongoURI =
+    process.env.MONGO_URL ||
+    'mongodb://localhost:27017/appNote';
 
 async function connectDatabase() {
     let conn = await mongoose.connect(mongoURI);

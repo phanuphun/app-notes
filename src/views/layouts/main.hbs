@@ -7,21 +7,25 @@
   <link rel="stylesheet" href="/css/app.css" />
   <link rel="stylesheet" href="/css/animate.min.css" />
   <link rel="stylesheet" href="/css/notyf.min.css" />
-  <script src="/javascript/notyf.min.js"></script>
+
+  <script src="/javascript/notyf.min.js" defer></script>
+  <script src="/javascript/app.js" defer></script>
+  <script src="/javascript/components/modal.js" defer></script>
+  <script src="/javascript/components/navbar.js" defer></script>
+
+  {{#if pageScripts}}
+  {{#each pageScripts}}
+  <script src="{{this}}" defer></script>
+  {{/each}}
+  {{/if}}
 </head>
 
 <body class="min-h-screen bg-gray-100">
   {{#unless hideNavbar}}
   {{> navbar}}
   {{/unless}}
-
   <main class="max-w-7xl mx-auto p-4">
     {{{body}}}
   </main>
 </body>
-
-<script>
-  var msg = new Notyf()
-</script>
-
 </html>

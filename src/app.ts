@@ -8,7 +8,6 @@ import * as path from 'path';
 import { engine } from 'express-handlebars';
 import webRouter from './routers/web/index.web.router';
 import hbsEngineConfigOptions from './configs/hbs.config';
-import connectLiveReload from "connect-livereload";
 import cookieParser from 'cookie-parser';
 import { attachUserFromJwtCookie } from './middlewares/web-auth';
 import methodOverride from 'method-override';
@@ -16,18 +15,23 @@ import methodOverride from 'method-override';
 
 const app = express();
 
-const APP_PREFIX = appConfig.app.prefix || '/api';
+const APP_PREFIX = appConfig.app.prefix || '/api/v1';
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = process.env.NODE_ENV === 'development';
 
-const viewsPath = isProd
-    ? path.resolve(__dirname, "views")
-    : path.resolve("src", "views");
+
+const viewsPath = isProd ? path.resolve(__dirname, 'views')
+    : path.resolve('src', 'views');
+
+// static: dev เสิร์ฟจาก public/, prod เสิร์ฟจาก dist/public
+const staticPath = isProd ? path.resolve(__dirname, 'public')
+    : path.resolve('public');
 
 function createApp(): express.Express {
     if (isDev) {
-        app.use(connectLiveReload({ port: 35729 }));   
+        const connectLiveReload = require("connect-livereload");
+        app.use(connectLiveReload({ port: 35729 }));
     }
 
     app.set('views', viewsPath);
@@ -37,14 +41,14 @@ function createApp(): express.Express {
     // Middlewares
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(express.static('public'));
+    app.use(express.static(staticPath));
 
     app.use(methodOverride('_method'));
     app.use(morgan('short'));
     app.use(cors());
     app.use(cookieParser());
     app.use(attachUserFromJwtCookie);
-    
+
     if (isDev) {
         app.use(helmet({ contentSecurityPolicy: false }));
         // กัน cache หน้า HTML ใน dev ด้วย

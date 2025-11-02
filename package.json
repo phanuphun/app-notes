@@ -19,7 +19,7 @@
     "dev:serve": "cross-env NODE_ENV=development nodemon --exec \"ts-node --files src/server.ts\"",
     "dev": "npm run copy:css:animated && npm run copy:notyf && concurrently -n CSS,HBS,API \"npm:dev:css:watch\" \"npm:dev:views:watch\" \"npm:dev:serve\"",
     "build:css": "postcss public/css/app.dev.css -o dist/public/css/app.css",
-    "copy:views": "copyfiles -u 1 \"src/views/**/*\" dist/views",
+    "copy:views": "copyfiles -u 2 \"src/views/**/*\" dist/views",
     "copy:public": "copyfiles -u 1 \"public/**/*\" dist/public",
     "build": "npm run clean && tsc && npm run copy:css:animated && npm run copy:notyf && npm run build:css && npm run copy:views && npm run copy:public",
     "start": "cross-env NODE_ENV=production node dist/server.js"

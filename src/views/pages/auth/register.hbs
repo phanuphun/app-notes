@@ -49,33 +49,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const registerForm = document.getElementById('registerForm');
-  registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const fd = new FormData(registerForm);
-    const payload = new URLSearchParams(fd); // ให้ Express urlencoded รับได้
-
-    if (fd.get('password') !== fd.get('confirmPassword')) {
-      msg.error('Passwords do not match.');
-      return;
-    }
-
-    const res = await fetch('/api/v1/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: payload.toString()
-    });
-
-    const result = await res.json();
-    if (result.ok) {
-      msg.success('Registration successful! Please login.');
-      setTimeout(() => {
-        window.location.href = '/login';
-      }, 1000);
-    } else {
-      msg.error(result.message || 'Registration failed. Please try again.');
-    }
-  });
-</script>
