@@ -2,53 +2,37 @@
 This repository is a minimal workshop to learn the basics of the Handlebars templating language with Express.js, used to create a sample SSR CRUD web app.
 - Tech Stack : Handlebars , Express.js , Typescript , DaisyUI , Tailwind CSS and MongoDB
 
-## directory
-```txt
-.
-├── public/
-├── src/
-│   ├── configs/
-│   │   ├── hbs.config.ts     # Handlebars engine config 
-│   │   └── ...
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routers/
-│   │   ├── api/
-│   │   └── web/                # SSR routes
-│   ├── schemas/
-│   ├── services/
-│   ├── types/
-│   ├── utils/
-│   │   └── hbs.ts              # Define Handlebars helpers 
-│   ├── views/
-│   │   ├── layout/
-│   │   │   └── main.hbs        # Base layout (Wrapper)
-│   │   ├── partials/           # Components
-│   │   └── ...
-│   ├── app.ts
-│   └── server.ts
-└── ...
-```
-
 ## Installation
+### Environment Setup
+1. `git clone <repository-url`
+2. `cd chat-room`
+3. `npm install`
+4. `cp .env.example .env`
 
-### 1. Environment Setup
-```bash
-git clone <repository-url>
-cd chat-room
+### Development Mode
+1. `npm run dev`
+### Docker Deployment
+1. `docker-compose up -d`
 
-npm install
-
-cp .env.example .env
-```
-
-### 2. Development Mode
-```bash
-npm run dev
-```
-
-### 3. Docker Deployment
-```bash
-docker-compose up -d
-```
+## Previews
+<table>
+    <thead></thead>
+    <tbody>
+         <tr>
+            <td>
+                <img src="./public/demo/login-page.png"/>
+            </td>
+            <td>
+                <img src="./public/demo/register-page.png"/>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <img src="./public/demo/add-note-page.png"/>
+            </td>
+            <td>
+                <img src="./public/demo/note-page.png"/>
+            </td>
+        </tr>
+    <tbody>
+<table>
